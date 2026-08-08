@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>India Air Quality Monitor</title>
+  <meta name="description" content="Hourly PM2.5 and NAQI readings for six major Indian cities. A public data-engineering pipeline built on DuckDB, GitHub Actions, and GitHub Pages.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Serif:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="brand">
+        <div class="brand-mark" aria-hidden="true"></div>
+        <div>
+          <h1>India Air Quality Monitor</h1>
+          <p class="subtitle">Hourly PM<sub>2.5</sub> and NAQI for six cities · public data pipeline</p>
+        </div>
+      </div>
+      <div class="meta" id="header-meta">
+        <span class="meta-label">Last update</span>
+        <span class="meta-value" id="last-update">—</span>
+      </div>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- HERO: worst current reading -->
+    <section class="hero" id="hero">
+      <div class="hero-eyebrow">Worst right now</div>
+      <div class="hero-city" id="hero-city">—</div>
+      <div class="hero-number-wrap">
+        <div class="hero-glow" id="hero-glow"></div>
+        <div class="hero-number" id="hero-number">—</div>
+      </div>
+      <div class="hero-category" id="hero-category">—</div>
+      <div class="hero-scale" aria-hidden="true">
+        <div class="scale-band" style="background:#8FBF3B" title="Good (0–50)"></div>
+        <div class="scale-band" style="background:#B8D651" title="Satisfactory (51–100)"></div>
+        <div class="scale-band" style="background:#F5C24F" title="Moderate (101–200)"></div>
+        <div class="scale-band" style="background:#EE8A3A" title="Poor (201–300)"></div>
+        <div class="scale-band" style="background:#D3492A" title="Very Poor (301–400)"></div>
+        <div class="scale-band" style="background:#7A1A1A" title="Severe (401+)"></div>
+      </div>
+    </section>
+
+    <!-- CITY CARDS -->
+    <section class="cards-section">
+      <h2 class="section-title">
+        <span class="section-num">01</span>
+        Current readings
+      </h2>
+      <div class="cards" id="city-cards"></div>
+    </section>
+
+    <!-- TREND CHART -->
+    <section class="trend-section">
+      <h2 class="section-title">
+        <span class="section-num">02</span>
+        7-day NAQI trend
+      </h2>
+      <div class="trend-controls" id="trend-controls"></div>
+      <div class="trend-chart-wrap">
+        <canvas id="trend-chart"></canvas>
+      </div>
+    </section>
+
+    <!-- METHOD NOTE -->
+    <section class="method">
+      <h2 class="section-title">
+        <span class="section-num">03</span>
+        How this works
+      </h2>
+      <div class="method-grid">
+        <div class="method-cell">
+          <div class="method-label">Ingest</div>
+          <p>A GitHub Action fetches the last 48 hours of hourly readings from Open-Meteo's Air Quality API every hour and commits the raw JSON to this repo.</p>
+        </div>
+        <div class="method-cell">
+          <div class="method-label">Transform</div>
+          <p>DuckDB runs three SQL steps in memory — bronze (typed Parquet), silver (deduped, quality-checked), gold (NAQI and aggregations) — and writes the results back as Parquet + JSON.</p>
+        </div>
+        <div class="method-cell">
+          <div class="method-label">Serve</div>
+          <p>This dashboard is a static site on GitHub Pages that fetches the pre-computed JSON. No servers, no databases, no cost.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>Air quality data from <a href="https://open-meteo.com/en/docs/air-quality-api">Open-Meteo</a>. NAQI computed per <a href="https://cpcb.nic.in/">CPCB, Government of India</a> breakpoints. <a href="https://github.com/YOUR_USERNAME/aqi-india">Source on GitHub</a>.</p>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.6/dist/chart.umd.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
