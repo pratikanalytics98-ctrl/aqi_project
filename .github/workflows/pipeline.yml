@@ -57,3 +57,9 @@ jobs:
           # Include the run timestamp so the history is scannable.
           git commit -m "data: hourly update ($(date -u +'%Y-%m-%d %H:%M UTC'))"
           git push
+          
+      - name: Trigger Pages deploy
+        if: success()
+        run: gh workflow run pages.yml
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
