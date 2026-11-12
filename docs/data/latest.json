@@ -11,7 +11,7 @@
     "o3": 52.0,
     "no2": 22.4,
     "so2": 21.5,
-    "co": 663.0,
+    "co": 643.0,
     "naqi_pm25": 331.0,
     "category": "Very Poor"
   },
@@ -27,7 +27,7 @@
     "o3": 35.0,
     "no2": 28.1,
     "so2": 21.4,
-    "co": 605.0,
+    "co": 598.0,
     "naqi_pm25": 100.0,
     "category": "Satisfactory"
   },
@@ -59,7 +59,7 @@
     "o3": 140.0,
     "no2": 2.5,
     "so2": 8.6,
-    "co": 359.0,
+    "co": 356.0,
     "naqi_pm25": 70.0,
     "category": "Satisfactory"
   },
@@ -75,7 +75,7 @@
     "o3": 90.0,
     "no2": 9.7,
     "so2": 17.5,
-    "co": 325.0,
+    "co": 328.0,
     "naqi_pm25": 68.0,
     "category": "Satisfactory"
   },
@@ -91,7 +91,7 @@
     "o3": 77.0,
     "no2": 17.8,
     "so2": 24.3,
-    "co": 406.0,
+    "co": 409.0,
     "naqi_pm25": 59.0,
     "category": "Satisfactory"
   }
